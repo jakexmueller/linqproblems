@@ -20,6 +20,29 @@ namespace LINQProblems
                 Console.WriteLine(word);
 
             }
+
+            ////////////////////////////////////////
+
+            List<string> names = new List<string>() { "Mike", "Dan", "Scott", "Nick", "Mike" };
+            List<string> duplicateNames = new List<string>();
+            List<string> singularNames = new List<string>();
+
+            var duplicates = names.GroupBy(i => i).Where(g => g.Count() > 1).Select(g => g.Key);
+            foreach (var d in duplicates)
+
+            {
+                duplicateNames.Add(d);
+            }
+
+            var singulars = names.GroupBy(i => i).Where(g => g.Count() == 1).Select(g => g.Key);
+            foreach (var s in singulars)
+            {
+                singularNames.Add(s);
+                
+            }
+            duplicateNames = duplicateNames.Concat(singularNames).ToList();
+            duplicateNames.ForEach(Console.WriteLine);
+
             Console.ReadLine();
         }
     }
